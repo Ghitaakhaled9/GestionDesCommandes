@@ -1,30 +1,48 @@
-<?xml version="1.0"?>
 <odoo>
-	<!-- Records -->
-	<record id="commande_model_action" model="ir.actions.act_window">
-		<field name="name">Commande action</field>
-		<field name="res_model">commande_model</field>
-		<field name="view_mode">list,form</field>
-		<field name="help" type="html">
-			<p class="o_view_nocontent_smiling_face">
-				Create Command
-			</p>
-		</field>
-	</record>
+    <!-- Vue liste -->
+    <record id="view_gestion_commandes_tree" model="ir.ui.view">
+        <field name="name">gestion.commandes.tree</field>
+        <field name="model">gestion.commandes</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="date_commande"/>
+                <field name="client_id"/>
+                <field name="total"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
 
-	<record id="commande_tree_view" model="ir.ui.view">
-		<field name="name">commande.tree.view</field>
-		<field name="model">commande_model</field>
-		<field name="arch" type="xml">
-			<tree>
-				<field name="name"/>
-				<field name="total"/>
-			</tree>
-		</field>
-	</record>
+    <!-- Vue formulaire -->
+    <record id="view_gestion_commandes_form" model="ir.ui.view">
+        <field name="name">gestion.commandes.form</field>
+        <field name="model">gestion.commandes</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date_commande"/>
+                        <field name="client_id"/>
+                        <field name="total"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-	<!-- Menu items -->
-	<menuitem id="commandes_menu" name="Gestion commandes" sequence="10"/>
-	<menuitem id="commandes_menu_items" name="Commandes"
-		parent="commandes_menu" action="commande_model_action"/>
+    <!-- Action -->
+    <record id="action_gestion_commandes" model="ir.actions.act_window">
+        <field name="name">Gestion des Commandes</field>
+        <field name="res_model">gestion.commandes</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu principal -->
+    <menuitem id="gestion_commandes_menu" name="Gestion des Commandes" sequence="10"/>
+
+    <!-- Sous-menu -->
+    <menuitem id="gestion_commandes_menu_items" name="Commandes" parent="gestion_commandes_menu" action="action_gestion_commandes"/>
 </odoo>
